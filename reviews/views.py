@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db import connection
 from .models import AlbumReview
 from django.contrib.auth import authenticate, login
+from django.utils.http import url_has_allowed_host_and_scheme
 
 # Create your views here.
 
@@ -17,13 +18,14 @@ def search_view(request):
     reviews = []
     if query:
         with connection.cursor() as cursor:
-            cursor.execute(f"SELECT * FROM reviews_albumreview WHERE title LIKE '%{query}%'") #flaw#1
+            cursor.execute(f"SELECT * FROM reviews_albumreview WHERE title LIKE '%{query}%'") #FLAW1
+            #cursor.execute("SELECT * FROM reviews_albumreview WHERE title LIKE %s", [f'%{query}%'])
             rows = cursor.fetchall()
             for row in rows:
                 reviews.append({'title': row[1], 'content': row[2], 'rating': row[3]})
     return render(request, 'pages/search.html', {'reviews': reviews})
 
-@csrf_exempt #flaw4
+@csrf_exempt #FLAW4 remove this to repair
 @login_required
 def add_review(request):
     if request.method == 'POST':
@@ -37,7 +39,9 @@ def add_review(request):
 @login_required
 def delete_review(request, id):
     review = AlbumReview.objects.get(id=id)
-    review.delete() #flaw3
+    review.delete() #FLAW3
+    #if review.author != request.user:
+                #return HttpResponse("You dont have rights to this ", status=403)
     return redirect('/')
 
 def login_view(request):
@@ -48,6 +52,8 @@ def login_view(request):
             next_page = request.GET.get('next')
             if next_page:
                 return redirect(next_page) #flaw5
+            #if next_page and url_has_allowed_host_and_scheme(next_page, allowed_hosts={request.get_host()}):
+                #return redirect(next_page)
             return redirect('/')
         else:
             return HttpResponse("Wrong username or password")
