@@ -17,13 +17,13 @@ def search_view(request):
     reviews = []
     if query:
         with connection.cursor() as cursor:
-            cursor.execute(f"SELECT * FROM reviews_albumreview WHERE title LIKE '%{query}%'")
+            cursor.execute(f"SELECT * FROM reviews_albumreview WHERE title LIKE '%{query}%'") #flaw#1
             rows = cursor.fetchall()
             for row in rows:
                 reviews.append({'title': row[1], 'content': row[2], 'rating': row[3]})
     return render(request, 'pages/search.html', {'reviews': reviews})
 
-@csrf_exempt
+@csrf_exempt #flaw4
 @login_required
 def add_review(request):
     if request.method == 'POST':
@@ -37,7 +37,7 @@ def add_review(request):
 @login_required
 def delete_review(request, id):
     review = AlbumReview.objects.get(id=id)
-    review.delete()
+    review.delete() #flaw3
     return redirect('/')
 
 def login_view(request):
@@ -47,8 +47,9 @@ def login_view(request):
             login(request, user)
             next_page = request.GET.get('next')
             if next_page:
-                return redirect(next_page)
+                return redirect(next_page) #flaw5
             return redirect('/')
         else:
             return HttpResponse("Wrong username or password")
     return render(request, 'pages/login.html')
+

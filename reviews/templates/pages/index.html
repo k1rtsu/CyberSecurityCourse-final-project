@@ -6,7 +6,7 @@
     {% for review in reviews %}
     <li>
         <h3>{{ review.title }}</h3>
-        <p>{{ review.content|safe }}</p>
+        <p>{{ review.content|safe }}</p>  <! --FLAW #2-- >
         <p>Rating: {{ review.rating }}/5</p>
         <small>Author: {{ review.author.username }}</small>
         <br>
