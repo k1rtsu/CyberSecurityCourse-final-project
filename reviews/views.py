@@ -50,5 +50,5 @@ def login_view(request):
                 return redirect(next_page)
             return redirect('/')
         else:
-            return HttpResponse("Väärä käyttäjätunnus tai salasana")
+            return HttpResponse("Wrong username or password")
     return render(request, 'pages/login.html')
