@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Uusimmat arvostelut</h1>
+<ul>
+    {% for review in reviews %}
+    <li>
+        <h3>{{ review.title }}</h3>
+        <p>{{ review.content|safe }}</p>
+        <p>Arvosana: {{ review.rating }}/5</p>
+        <small>Kirjoittaja: {{ review.author.username }}</small>
+        <br>
+        <a href="/delete/{{ review.id }}/">Poista arvostelu</a>
+    </li>
+    {% empty %}
+    <p>Ei arvosteluja vielä.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

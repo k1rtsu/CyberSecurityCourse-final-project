@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lisää uusi arvostelu</h2>
+<form method="post">
+    {% csrf_token %}
+    <p>
+        <label>Albumi:</label><br>
+        <input type="text" name="title">
+    </p>
+    <p>
+        <label>Arvostelu:</label><br>
+        <textarea name="content"></textarea>
+    </p>
+    <p>
+        <label>Arvosana (1-5):</label><br>
+        <input type="number" name="rating">
+    </p>
+    <button type="submit">Tallenna</button>
+</form>
+{% endblock %}

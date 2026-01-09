@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Musiikkiblogi</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Etusivu</a>
+        <a href="/add/">Lisää arvostelu</a>
+        <a href="/login/">Kirjaudu</a>
+        <form action="/search/" method="get" style="display:inline;">
+            <input type="text" name="q" placeholder="Hae...">
+            <button type="submit">Hae</button>
+        </form>
+    </nav>
+    <hr>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
