@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.db import connection
 from .models import AlbumReview
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
@@ -41,8 +42,13 @@ def delete_review(request, id):
 
 def login_view(request):
     if request.method == 'POST':
-        next_page = request.GET.get('next')
-        if next_page:
-            return redirect(next_page)
-        return redirect('/')
+        user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
+        if user is not None:
+            login(request, user)
+            next_page = request.GET.get('next')
+            if next_page:
+                return redirect(next_page)
+            return redirect('/')
+        else:
+            return HttpResponse("Väärä käyttäjätunnus tai salasana")
     return render(request, 'pages/login.html')
