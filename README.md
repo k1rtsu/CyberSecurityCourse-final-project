@@ -5,9 +5,14 @@ This is a web application project for the University of Helsinki's *Cyber Securi
 The application is a **Music Album Blog** where users can sign up, log in, and write reviews for music albums. 
 
 
-## 🛠 Installation and Running
+The detailed analysis of the vulnerabilities, including descriptions, locations in code, and mitigation strategies, can be found in the separate report file:
+
+👉 **[Read the Vulnerability Report (REPORT.md)](REPORT.md)** 👈
+
+##  Installation and Running
 
 Follow these steps to get the application running on your local machine.
+
 
 ### Prerequisites
 * Python 3 installed
