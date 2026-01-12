@@ -1,19 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Latest Reviews</h1>
-<ul>
-    {% for review in reviews %}
-    <li>
-        <h3>{{ review.title }}</h3>
-        <p>{{ review.content|safe }}</p>  <! --FLAW #2 to repair, change to this <p>{{ review.content }}</p> -- >
-        <p>Rating: {{ review.rating }}/5</p>
-        <small>Author: {{ review.author.username }}</small>
-        <br>
-        <a href="/delete/{{ review.id }}/">Delete Review</a>
-    </li>
-    {% empty %}
-    <p>No reviews yet.</p>
-    {% endfor %}
-</ul>
+    <h1>Latest Reviews</h1>
+
+    {% if user.is_authenticated %}
+        <p>Welcome back, <b>{{ user.username }}</b>!</p>
+    {% else %}
+        <p>You are browsing as a guest. <a href="/login/">Log in</a> to write reviews.</p>
+    {% endif %}
+
+    <ul>
+        {% for review in reviews %}
+        <li>
+            <h3>{{ review.title }}</h3>
+            
+            <p>{{ review.content|safe }}</p>  <!-- FLAW2 to fix this, change it to '{{review.content}}' -->
+            <p>Rating: {{ review.rating }}/5</p>
+            <small>Author: {{ review.author.username }}</small>
+            <br>
+            <a href="/delete/{{ review.id }}/">Delete Review</a>
+        </li>
+        {% empty %}
+        <p>No reviews yet.</p>
+        {% endfor %}
+    </ul>
 {% endblock %}

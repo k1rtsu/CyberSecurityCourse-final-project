@@ -39,9 +39,9 @@ def add_review(request):
 @login_required
 def delete_review(request, id):
     review = AlbumReview.objects.get(id=id)
-    review.delete() #FLAW3
     #if review.author != request.user:
                 #return HttpResponse("You dont have rights to this ", status=403)
+    review.delete() #FLAW3
     return redirect('/')
 
 def login_view(request):
