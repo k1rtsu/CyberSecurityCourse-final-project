@@ -50,8 +50,8 @@ def login_view(request):
         if user is not None:
             login(request, user)
             next_page = request.GET.get('next')
-            if next_page:
-                return redirect(next_page) #flaw5
+            if next_page: #flaw5
+                return redirect(next_page)
             #if next_page and url_has_allowed_host_and_scheme(next_page, allowed_hosts={request.get_host()}):
                 #return redirect(next_page)
             return redirect('/')
