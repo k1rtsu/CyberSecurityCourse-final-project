@@ -7,7 +7,7 @@ The application is a **Music Album Blog** where users can sign up, log in, and w
 
 The detailed analysis of the vulnerabilities, including descriptions, locations in code, and mitigation strategies, can be found in the separate report file:
 
-👉 **[Read the Vulnerability Report (REPORT.md)](REPORT.md)** 👈
+ **[Read the Vulnerability Report (REPORT.md)](REPORT.md)** 
 
 ##  Installation and Running
 
