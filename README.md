@@ -1,4 +1,4 @@
-# Cyber Security Base 2024 - Final Project
+# Cyber Security Base 2025 - Final Project
 
 This is a web application project for the University of Helsinki's *Cyber Security Base* course (Project I). 
 
